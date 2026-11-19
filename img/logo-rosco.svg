@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <circle cx="120" cy="120" r="95" fill="none" stroke="url(#ringGrad)" stroke-width="3" stroke-dasharray="10 6" opacity="0.5"/>
+  <circle cx="120" cy="120" r="78" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+  <g filter="url(#glow)">
+    <circle cx="120" cy="25" r="9" fill="#3b82f6"/>
+    <circle cx="187" cy="53" r="9" fill="#22c55e"/>
+    <circle cx="215" cy="120" r="9" fill="#3b82f6"/>
+    <circle cx="187" cy="187" r="9" fill="#ef4444"/>
+    <circle cx="120" cy="215" r="9" fill="#3b82f6"/>
+    <circle cx="53" cy="187" r="9" fill="#22c55e"/>
+    <circle cx="25" cy="120" r="9" fill="#3b82f6"/>
+    <circle cx="53" cy="53" r="9" fill="#22c55e"/>
+  </g>
+  <text x="120" y="114" font-family="system-ui, sans-serif" font-weight="900" font-size="22" letter-spacing="2" fill="#38bdf8" text-anchor="middle">PASAPALABRA</text>
+  <text x="120" y="138" font-family="system-ui, sans-serif" font-weight="700" font-size="13" letter-spacing="3" fill="#94a3b8" text-anchor="middle">TECH TRILINGÜE</text>
+</svg>

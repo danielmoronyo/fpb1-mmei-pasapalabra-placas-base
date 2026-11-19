@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pasapalabra Tech Trilingüe — El Rosco de Informática</title>
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <main class="app-container">
+    <!-- HEADER -->
+    <header class="top-bar">
+      <div class="brand">
+        <img src="img/favicon.svg" alt="Logo Rosco Tech" class="brand-icon" />
+        <div>
+          <span class="brand-tag" id="ui-subtitle">El rosco de informática</span>
+          <h1 class="brand-title">PASA<span>PALABRA</span></h1>
+        </div>
+      </div>
+
+      <div class="status-pills" id="game-hud" hidden>
+        <div class="pill pill-timer" id="timer-box">
+          <span class="pill-label" id="ui-hud-time">Tiempo</span>
+          <span class="pill-value" id="timer-display">180</span>
+        </div>
+        <div class="pill pill-correct">
+          <span class="pill-label" id="ui-hud-hits">Aciertos</span>
+          <span class="pill-value" id="hits-display">0</span>
+        </div>
+        <div class="pill pill-wrong">
+          <span class="pill-label" id="ui-hud-errors">Fallos</span>
+          <span class="pill-value" id="errors-display">0</span>
+        </div>
+        <button class="btn-icon" id="btn-quit" title="Volver al menú">✕</button>
+      </div>
+    </header>
+
+    <!-- PANTALLA DE CONFIGURACIÓN / INICIO -->
+    <section id="setup-screen" class="setup-layout">
+      <div class="preview-card">
+        <div class="rosco-wrapper preview-mode">
+          <div class="rosco-ring" id="preview-rosco"></div>
+          <div class="rosco-center">
+            <p class="center-kicker" id="preview-kicker">El rosco de informática</p>
+            <h2 class="center-title">PASA<br><span>PALABRA</span></h2>
+            <p class="center-badge" id="preview-badge">27 · Castellano</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="config-panel">
+        <div class="config-group">
+          <h2 class="config-heading" id="ui-cfg-lang">Idioma</h2>
+          <div class="option-grid cols-3" id="lang-options">
+            <button class="option-btn active" data-lang="es">
+              <span class="opt-flag">ES</span>
+              <span class="opt-name">Castellano</span>
+              <span class="opt-meta">27 letras (con Ñ)</span>
+            </button>
+            <button class="option-btn" data-lang="va">
+              <span class="opt-flag">VA</span>
+              <span class="opt-name">Valencià</span>
+              <span class="opt-meta">26 lletres</span>
+            </button>
+            <button class="option-btn" data-lang="en">
+              <span class="opt-flag">EN</span>
+              <span class="opt-name">English</span>
+              <span class="opt-meta">26 letters</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h2 class="config-heading" id="ui-cfg-rosco">Rosco</h2>
+          <div class="option-grid cols-3" id="rosco-options">
+            <button class="option-btn active" data-set="0">
+              <span class="opt-name" id="ui-set-1">Rosco 1</span>
+              <span class="opt-meta" id="ui-set-1-desc">Hardware y Sistemas</span>
+            </button>
+            <button class="option-btn" data-set="1">
+              <span class="opt-name" id="ui-set-2">Rosco 2</span>
+              <span class="opt-meta" id="ui-set-2-desc">Redes y Seguridad</span>
+            </button>
+            <button class="option-btn" data-set="2">
+              <span class="opt-name" id="ui-set-3">Rosco 3</span>
+              <span class="opt-meta" id="ui-set-3-desc">Web y Programación</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h2 class="config-heading" id="ui-cfg-time">Tiempo</h2>
+          <div class="option-grid cols-4" id="time-options">
+            <button class="option-btn" data-time="120">
+              <span class="opt-name">120s</span>
+              <span class="opt-meta" id="ui-t-fast">Rápido</span>
+            </button>
+            <button class="option-btn active" data-time="180">
+              <span class="opt-name">180s</span>
+              <span class="opt-meta" id="ui-t-normal">Normal</span>
+            </button>
+            <button class="option-btn" data-time="240">
+              <span class="opt-name">240s</span>
+              <span class="opt-meta" id="ui-t-relaxed">Relax</span>
+            </button>
+            <button class="option-btn" data-time="0">
+              <span class="opt-name">∞</span>
+              <span class="opt-meta" id="ui-t-unlimited">Sin límite</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-start" id="btn-start">
+          <span id="ui-btn-start">JUGAR ROSCO</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- PANTALLA DE JUEGO -->
+    <section id="game-screen" class="game-layout" hidden>
+      <div class="rosco-stage">
+        <div class="rosco-wrapper">
+          <div class="rosco-ring" id="game-rosco"></div>
+          <div class="rosco-center active-letter-box">
+            <span class="active-rule" id="clue-rule">EMPIEZA POR</span>
+            <div class="active-letter" id="active-letter-display">A</div>
+            <span class="active-counter" id="letter-progress">1 / 27</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="clue-card">
+        <div class="clue-header">
+          <span class="clue-badge" id="clue-category">Informática</span>
+          <span class="clue-lang-tag" id="clue-lang-label">Castellano</span>
+        </div>
+
+        <p class="clue-text" id="clue-definition">
+          Cargando definición...
+        </p>
+
+        <div class="feedback-banner" id="feedback-banner" aria-live="polite"></div>
+
+        <form id="answer-form" class="answer-form" autocomplete="off">
+          <input
+            type="text"
+            id="answer-input"
+            class="answer-input"
+            placeholder="Escribe tu respuesta..."
+            spellcheck="false"
+          />
+          <div class="action-buttons">
+            <button type="submit" class="btn-primary" id="btn-submit">Comprobar</button>
+            <button type="button" class="btn-secondary" id="btn-pasapalabra">Pasapalabra</button>
+          </div>
+        </form>
+
+        <p class="keyboard-hint" id="ui-kbd-hint">
+          Pulsa <strong>Enter</strong> para responder · <strong>Espacio</strong> (con campo vacío) o botón para <strong>Pasapalabra</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- PANTALLA DE RESULTADOS -->
+    <section id="result-screen" class="result-layout" hidden>
+      <div class="result-card">
+        <img src="img/logo-rosco.svg" alt="Rosco completado" class="result-logo" />
+        <h2 class="result-title" id="result-title">¡Rosco completado!</h2>
+        <p class="result-subtitle" id="result-subtitle">Resumen de tu partida</p>
+
+        <div class="result-stats">
+          <div class="stat-box stat-hit">
+            <span class="stat-num" id="res-hits">0</span>
+            <span class="stat-lbl" id="ui-res-hits">Aciertos</span>
+          </div>
+          <div class="stat-box stat-err">
+            <span class="stat-num" id="res-errors">0</span>
+            <span class="stat-lbl" id="ui-res-errors">Fallos</span>
+          </div>
+          <div class="stat-box stat-pend">
+            <span class="stat-num" id="res-pending">0</span>
+            <span class="stat-lbl" id="ui-res-pending">Sin responder</span>
+          </div>
+          <div class="stat-box stat-time">
+            <span class="stat-num" id="res-time">0s</span>
+            <span class="stat-lbl" id="ui-res-time">Tiempo restante</span>
+          </div>
+        </div>
+
+        <div class="review-list" id="review-list"></div>
+
+        <div class="result-actions">
+          <button class="btn-primary" id="btn-replay">Volver a jugar</button>
+          <button class="btn-secondary" id="btn-menu">Cambiar configuración</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/questions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
